@@ -1,0 +1,31 @@
+# Gradle
+.gradle/
+build/
+
+# Android
+*.apk
+*.aab
+*.aar
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local config
+local.properties
+
+# Keystore files (sensitive)
+keystore.jks
+keystore.properties
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.bak

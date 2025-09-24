@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Tema para modo oscuro -->
+    <style name="Theme.ExposiGuard" parent="Theme.Material3.Dark.NoActionBar">
+        <!-- Paleta estándar de modo oscuro -->
+        <item name="colorPrimary">@color/primary_dark</item>
+        <item name="colorOnPrimary">@color/on_primary_dark</item>
+
+        <item name="colorSecondary">@color/secondary_dark</item>
+        <item name="colorOnSecondary">@color/on_secondary_dark</item>
+
+        <item name="colorTertiary">@color/tertiary_dark</item>
+        <item name="colorOnTertiary">@color/on_tertiary_dark</item>
+
+        <item name="colorSurface">@color/surface_dark</item>
+        <item name="colorOnSurface">@color/on_surface_dark</item>
+        <item name="colorSurfaceVariant">@color/surface_dark</item>
+        <item name="colorOnSurfaceVariant">@color/on_surface_dark</item>
+
+        <item name="android:colorBackground">@color/background_dark</item>
+        <item name="colorOnBackground">@color/on_background_dark</item>
+
+        <item name="colorError">@color/error_dark</item>
+        <item name="colorOnError">@color/on_error_dark</item>
+
+        <!-- System bars -->
+        <item name="android:statusBarColor">@color/surface_dark</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">@color/surface_dark</item>
+
+        <!-- Texto: unificado a colorOnSurface (blanco) -->
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:textColorPrimary">?attr/colorOnSurface</item>
+        <item name="android:textColorSecondary">?attr/colorOnSurface</item>
+        <item name="android:textColorHint">?attr/colorOnSurface</item>
+    </style>
+
+    <!-- Overlay de NavigationView en modo oscuro -->
+    <style name="ThemeOverlay.ExposiGuard.NavigationView" parent="ThemeOverlay.Material3.NavigationView">
+        <item name="colorSurface">@color/surface_dark</item>
+        <item name="colorOnSurface">@color/on_surface_dark</item>
+        <item name="android:textColorPrimary">@color/on_surface_dark</item>
+        <item name="android:textColorSecondary">@color/on_surface_dark</item>
+        <item name="itemTextColor">@color/on_surface_dark</item>
+        <item name="itemIconTint">@color/on_surface_dark</item>
+        <item name="itemRippleColor">@color/ripple_dark</item>
+        <item name="itemBackground">@drawable/nav_item_bg_dark</item>
+    </style>
+</resources>

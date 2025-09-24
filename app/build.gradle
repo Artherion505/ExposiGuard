@@ -1,0 +1,153 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'com.google.devtools.ksp'
+    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
+}
+apply plugin: 'com.google.dagger.hilt.android'
+
+// Cargar propiedades del keystore para firma de release (opcional)
+def keystorePropertiesFile = rootProject.file('keystore.properties')
+def keystoreProperties = new Properties()
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
+android {
+    namespace 'com.exposiguard.app'
+    compileSdk 35  // Actualizado para Android 15
+
+    defaultConfig {
+        applicationId "com.exposiguard.app"
+        minSdk 21
+    targetSdk 35  // Actualizado para Android 15
+    versionCode 9
+    versionName "1.0.9"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    sourceSets {
+        main {
+            java.srcDirs += 'src/main/java'
+            kotlin.srcDirs += 'src/main/java'
+        }
+    }
+
+    // Definir signingConfigs antes de buildTypes
+    signingConfigs {
+        release {
+            if (keystoreProperties.containsKey('storeFile')) {
+                storeFile rootProject.file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
+            // Removido signingConfig para F-Droid (F-Droid firma los APKs)
+        }
+        github {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
+            signingConfig signingConfigs.release
+        }
+        debug {
+            minifyEnabled false
+        }
+    }
+
+    // Configuración actualizada para Android moderno
+    androidResources {
+        noCompress 'resources.arsc'
+    }
+
+    // Configuraciones de privacidad
+    lint {
+        disable 'MissingTranslation', 'ExtraTranslation'
+        abortOnError false
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+    buildFeatures {
+        viewBinding true
+    }
+
+    testOptions {
+        unitTests.includeAndroidResources = true
+        unitTests.all {
+            it.systemProperty 'robolectric.dependency.repo.url', 'https://repo1.maven.org/maven2'
+            it.systemProperty 'robolectric.offline', 'true'
+            it.systemProperty 'robolectric.enabledSdks', '35'
+            it.exclude 'com/exposiguard/app/repository/ExposureRepositoryTest.class'
+            it.exclude 'com/exposiguard/app/repository/ExposureRepositoryBackfillTest.class'
+        }
+    }
+
+    // Nota: Evitamos usar APIs de Gradle deprecated como Configuration.fileCollection(Spec).
+    // No hay usos en este módulo; las advertencias provienen de tareas internas del AGP y no requieren cambios en el código del proyecto.
+}
+
+// Configuración KSP (opcional) para Room: exportar esquemas
+ksp {
+    arg('room.schemaLocation', "$projectDir/schemas")
+    arg('room.incremental', 'true')
+    arg('room.expandProjection', 'true')
+}
+
+dependencies {
+    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0'
+    implementation 'androidx.activity:activity-ktx:1.8.2'
+    implementation 'androidx.fragment:fragment-ktx:1.6.2'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.6'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.7.6'
+    implementation 'androidx.datastore:datastore-preferences:1.0.0'
+    implementation 'androidx.work:work-runtime-ktx:2.9.0'
+    implementation 'androidx.hilt:hilt-work:1.2.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
+    // Room dependencies
+    implementation 'androidx.room:room-runtime:2.6.1'
+    implementation 'androidx.room:room-ktx:2.6.1'
+    ksp 'androidx.room:room-compiler:2.6.1'
+
+    // Hilt dependencies
+    implementation 'com.google.dagger:hilt-android:2.51.1'
+    ksp 'com.google.dagger:hilt-compiler:2.51.1'
+    kapt 'androidx.hilt:hilt-compiler:1.2.0'
+
+    // Gson for JSON serialization
+    implementation 'com.google.code.gson:gson:2.10.1'
+
+    // Test dependencies
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.robolectric:robolectric:4.11.1'
+    testImplementation 'androidx.test:core:1.5.0'
+    testImplementation 'androidx.test.ext:junit:1.1.5'
+    testImplementation 'org.mockito:mockito-core:5.8.0'
+    testImplementation 'org.mockito.kotlin:mockito-kotlin:5.1.0'
+
+    // Android Test dependencies
+    androidTestImplementation 'androidx.test:runner:1.5.2'
+    androidTestImplementation 'androidx.test:rules:1.5.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}

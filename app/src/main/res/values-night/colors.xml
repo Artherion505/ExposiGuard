@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_background">#3DDC84</color>
+
+    <!-- Colores compatibles con Material Design 3 para IMC (modo oscuro) -->
+    <color name="imc_normal">#81C784</color> <!-- Verde más claro para modo oscuro -->
+    <color name="imc_low">#64B5F6</color>   <!-- Azul más claro para modo oscuro -->
+    <color name="imc_high">#FFB74D</color> <!-- Naranja más claro para modo oscuro -->
+    <color name="imc_obese">#EF5350</color> <!-- Rojo más claro para modo oscuro -->
+    <color name="imc_default">#BDBDBD</color> <!-- Gris más claro para modo oscuro -->
+</resources>

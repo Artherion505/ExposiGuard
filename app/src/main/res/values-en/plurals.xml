@@ -1,0 +1,10 @@
+<resources>
+    <plurals name="ambient_rf_count_stations">
+        <item quantity="one">%d station</item>
+        <item quantity="other">%d stations</item>
+    </plurals>
+    <plurals name="ambient_rf_count_channels">
+        <item quantity="one">%d channel</item>
+        <item quantity="other">%d channels</item>
+    </plurals>
+</resources>

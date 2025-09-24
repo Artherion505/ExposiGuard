@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Tema principal con soporte completo para modo oscuro -->
+    <style name="Theme.ExposiGuard" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Colores primarios -->
+        <item name="colorPrimary">@color/primary_light</item>
+        <item name="colorOnPrimary">@color/on_primary_light</item>
+
+        <!-- Colores secundarios -->
+        <item name="colorSecondary">@color/secondary_light</item>
+        <item name="colorOnSecondary">@color/on_secondary_light</item>
+
+        <!-- Colores terciarios -->
+        <item name="colorTertiary">@color/tertiary_light</item>
+        <item name="colorOnTertiary">@color/on_tertiary_light</item>
+
+        <!-- Colores de superficie -->
+        <item name="colorSurface">@color/surface_light</item>
+        <item name="colorOnSurface">@color/on_surface_light</item>
+
+        <!-- Colores de fondo -->
+        <item name="android:colorBackground">@color/background_light</item>
+        <item name="colorOnBackground">@color/on_background_light</item>
+
+        <!-- Colores de error -->
+        <item name="colorError">@color/error_light</item>
+        <item name="colorOnError">@color/on_error_light</item>
+
+        <!-- Colores de superficie variante -->
+        <item name="colorSurfaceVariant">@color/surface_light</item>
+        <item name="colorOnSurfaceVariant">@color/on_surface_light</item>
+
+        <!-- Colores de contorno -->
+        <item name="colorOutline">@color/on_surface_light</item>
+        <item name="colorOnSurfaceInverse">@color/on_surface_dark</item>
+        <item name="colorSurfaceInverse">@color/surface_dark</item>
+    </style>
+
+    <!-- Tema para modo oscuro -->
+    <style name="Theme.ExposiGuard.Dark" parent="Theme.Material3.Dark.NoActionBar">
+        <!-- Colores primarios para modo oscuro -->
+        <item name="colorPrimary">@color/primary_dark</item>
+        <item name="colorOnPrimary">@color/on_primary_dark</item>
+
+        <!-- Colores secundarios para modo oscuro -->
+        <item name="colorSecondary">@color/secondary_dark</item>
+        <item name="colorOnSecondary">@color/on_secondary_dark</item>
+
+        <!-- Colores terciarios para modo oscuro -->
+        <item name="colorTertiary">@color/tertiary_dark</item>
+        <item name="colorOnTertiary">@color/on_tertiary_dark</item>
+
+        <!-- Colores de superficie para modo oscuro -->
+        <item name="colorSurface">@color/surface_dark</item>
+        <item name="colorOnSurface">@color/on_surface_dark</item>
+
+        <!-- Colores de fondo para modo oscuro -->
+        <item name="android:colorBackground">@color/background_dark</item>
+        <item name="colorOnBackground">@color/on_background_dark</item>
+
+        <!-- Colores de error para modo oscuro -->
+        <item name="colorError">@color/error_dark</item>
+        <item name="colorOnError">@color/on_error_dark</item>
+
+        <!-- Colores de superficie variante para modo oscuro -->
+        <item name="colorSurfaceVariant">@color/surface_dark</item>
+        <item name="colorOnSurfaceVariant">@color/on_surface_dark</item>
+
+        <!-- Colores de contorno para modo oscuro -->
+        <item name="colorOutline">@color/on_surface_dark</item>
+        <item name="colorOnSurfaceInverse">@color/on_surface_light</item>
+        <item name="colorSurfaceInverse">@color/surface_light</item>
+    </style>
+
+    <!-- NavigationView theme overlay para compatibilidad -->
+    <style name="ThemeOverlay.ExposiGuard.NavigationView" parent="ThemeOverlay.Material3.NavigationView">
+        <item name="colorSurface">@color/surface_dark</item>
+        <item name="colorOnSurface">@color/on_surface_dark</item>
+        <item name="android:textColorPrimary">@color/on_surface_dark</item>
+        <item name="android:textColorSecondary">@color/on_surface_dark</item>
+        <item name="itemTextColor">@color/on_surface_dark</item>
+        <item name="itemIconTint">@color/on_surface_dark</item>
+        <item name="itemRippleColor">@color/ripple_dark</item>
+        <item name="itemBackground">@drawable/nav_item_bg_dark</item>
+    </style>
+
+    <!-- NavigationView theme overlay para modo oscuro -->
+    <style name="ThemeOverlay.ExposiGuard.NavigationView.Dark" parent="ThemeOverlay.Material3.NavigationView">
+        <item name="colorSurface">@color/surface_dark</item>
+        <item name="colorOnSurface">@color/on_surface_dark</item>
+        <item name="android:textColorPrimary">@color/on_surface_dark</item>
+        <item name="android:textColorSecondary">@color/on_surface_dark</item>
+        <item name="itemTextColor">@color/on_surface_dark</item>
+        <item name="itemIconTint">@color/on_surface_dark</item>
+        <item name="itemRippleColor">@color/ripple_dark</item>
+        <item name="itemBackground">@drawable/nav_item_bg_dark</item>
+    </style>
+</resources>

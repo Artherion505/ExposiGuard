@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_background">#3DDC84</color>
+
+    <!-- Colores compatibles con Material Design 3 para IMC -->
+    <color name="imc_normal">#4CAF50</color> <!-- Verde para IMC normal -->
+    <color name="imc_low">#2196F3</color>   <!-- Azul para bajo peso -->
+    <color name="imc_high">#FF9800</color> <!-- Naranja para sobrepeso -->
+    <color name="imc_obese">#F44336</color> <!-- Rojo para obeso -->
+    <color name="imc_default">#9E9E9E</color> <!-- Gris para valores por defecto -->
+
+    <!-- Colores para modo oscuro -->
+    <color name="primary_dark">#4CAF50</color>
+    <color name="on_primary_dark">#FFFFFF</color>
+    <color name="secondary_dark">#03DAC6</color>
+    <color name="on_secondary_dark">#000000</color>
+    <color name="tertiary_dark">#BB86FC</color>
+    <color name="on_tertiary_dark">#000000</color>
+    <color name="surface_dark">#121212</color>
+    <color name="on_surface_dark">#FFFFFF</color>
+    <color name="background_dark">#121212</color>
+    <color name="on_background_dark">#FFFFFF</color>
+    <color name="error_dark">#CF6679</color>
+    <color name="on_error_dark">#000000</color>
+    <color name="ripple_dark">#26FFFFFF</color>
+
+    <!-- Colores para modo claro -->
+    <color name="primary_light">#3DDC84</color>
+    <color name="on_primary_light">#FFFFFF</color>
+    <color name="secondary_light">#03DAC6</color>
+    <color name="on_secondary_light">#000000</color>
+    <color name="tertiary_light">#BB86FC</color>
+    <color name="on_tertiary_light">#000000</color>
+    <color name="surface_light">#FFFFFF</color>
+    <color name="on_surface_light">#000000</color>
+    <color name="background_light">#FAFAFA</color>
+    <color name="on_background_light">#000000</color>
+    <color name="error_light">#B00020</color>
+    <color name="on_error_light">#FFFFFF</color>
+    <color name="error_color">#FF5722</color>
+
+    <!-- Colores petróleo removidos -->
+
+    <!-- Colores Semáforo/Exposición -->
+    <color name="traffic_green">#4CAF50</color>
+    <color name="traffic_yellow">#FFC107</color>
+    <color name="traffic_red">#F44336</color>
+    <color name="traffic_off">#BDBDBD</color>
+</resources>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/nav_home">
+
+    <!-- Home Fragment -->
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.exposiguard.app.ui.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <!-- WiFi Fragment -->
+    <fragment
+        android:id="@+id/nav_wifi"
+        android:name="com.exposiguard.app.ui.WiFiFragment"
+        android:label="@string/menu_wifi"
+        tools:layout="@layout/fragment_wifi" />
+
+    <!-- Bluetooth Fragment -->
+    <fragment
+        android:id="@+id/nav_bluetooth"
+        android:name="com.exposiguard.app.ui.BluetoothFragment"
+        android:label="@string/menu_bluetooth"
+        tools:layout="@layout/fragment_bluetooth" />
+
+    <!-- SAR Fragment -->
+    <fragment
+        android:id="@+id/nav_sar"
+        android:name="com.exposiguard.app.ui.SarFragment"
+        android:label="@string/menu_sar"
+        tools:layout="@layout/fragment_sar" />
+
+    <!-- EMF Fragment -->
+    <fragment
+        android:id="@+id/nav_emf"
+        android:name="com.exposiguard.app.ui.EMFFragment"
+        android:label="@string/menu_emf"
+        tools:layout="@layout/fragment_emf" />
+
+    <!-- Trends Fragment -->
+    <fragment
+        android:id="@+id/nav_trends"
+        android:name="com.exposiguard.app.ui.TrendsFragment"
+        android:label="@string/menu_trends"
+        tools:layout="@layout/fragment_trends" />
+
+    <!-- Settings Fragment -->
+    <fragment
+        android:id="@+id/nav_settings"
+    android:name="com.exposiguard.app.ui.SettingsFragment"
+        android:label="@string/menu_settings"
+        tools:layout="@layout/fragment_settings" />
+
+    <!-- Additional Screens (Drawer Navigation) -->
+    <!-- Ambient RF Fragment -->
+    <fragment
+        android:id="@+id/nav_ambient_rf"
+        android:name="com.exposiguard.app.ui.AmbientRfFragment"
+        android:label="@string/menu_ambient_rf"
+        tools:layout="@layout/fragment_ambient_rf" />
+    <fragment
+        android:id="@+id/nav_noise"
+        android:name="com.exposiguard.app.ui.noise.NoiseFragment"
+        android:label="@string/menu_noise"
+        tools:layout="@layout/fragment_noise" />
+
+    <fragment
+        android:id="@+id/nav_health"
+        android:name="com.exposiguard.app.ui.HealthFragment"
+        android:label="@string/menu_health"
+        tools:layout="@layout/fragment_health" />
+
+</navigation>

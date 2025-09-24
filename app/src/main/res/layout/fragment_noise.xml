@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
+    tools:context=".ui.noise.NoiseFragment">
+
+    <TextView
+        android:id="@+id/text_noise"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textColor="?attr/colorOnSurface"
+        android:text="@string/noise_monitor_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/noise_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="12dp"
+        app:cardBackgroundColor="?attr/colorSurface"
+        app:cardCornerRadius="12dp"
+        app:strokeWidth="0dp"
+        app:layout_constraintTop_toBottomOf="@id/text_noise"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/text_noise_live"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/noise_current_level"
+                android:textSize="16sp"
+                android:textColor="?attr/colorOnSurface"
+                android:paddingBottom="8dp" />
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/noise_progress"
+                style="@style/Widget.Material3.LinearProgressIndicator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:trackThickness="10dp"
+                android:indeterminate="false"
+                android:max="100" />
+
+            <TextView
+                android:id="@+id/text_noise_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/noise_result"
+                android:textSize="14sp"
+                android:textColor="?attr/colorOnSurface"
+                android:paddingTop="8dp" />
+
+            <TextView
+                android:id="@+id/text_noise_index"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/noise_index"
+                android:textSize="14sp"
+                android:textColor="?attr/colorOnSurface"
+                android:paddingTop="8dp" />
+
+            <com.exposiguard.app.ui.views.SparklineView
+                android:id="@+id/noise_sparkline"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp" />
+
+            <TextView
+                android:id="@+id/text_noise_scale"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/noise_scale"
+                android:textSize="12sp"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:gravity="center"
+                android:paddingTop="4dp"
+                android:contentDescription="Escala de referencia de niveles de decibelios" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:paddingTop="12dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_toggle_continuous"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/noise_start_monitoring"
+                    style="@style/Widget.Material3.Button.ElevatedButton" />
+
+                <Space
+                    android:layout_width="12dp"
+                    android:layout_height="wrap_content" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_quick_sample"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/noise_quick_measurement"
+                    style="@style/Widget.Material3.Button.OutlinedButton" />
+            </LinearLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- EMF Detector Card -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/emf_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        app:cardBackgroundColor="?attr/colorSurface"
+        app:cardCornerRadius="12dp"
+        app:strokeWidth="0dp"
+        app:layout_constraintTop_toBottomOf="@id/noise_card"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/text_emf_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/emf_detector_title"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textColor="?attr/colorOnSurface"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_emf_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/emf_detector_idle"
+                android:textAlignment="center"
+                android:textSize="14sp"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:paddingTop="4dp" />
+
+            <!-- EMF Meter Display -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/emf_detector_background"
+                android:padding="16dp">
+
+                <!-- Central EMF Value Display -->
+                <TextView
+                    android:id="@+id/text_emf_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:text="0.0"
+                    android:textSize="48sp"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    android:shadowColor="@android:color/black"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="4" />
+
+                <TextView
+                    android:id="@+id/text_emf_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_emf_value"
+                    android:layout_centerHorizontal="true"
+                    android:text="mG"
+                    android:textSize="16sp"
+                    android:textColor="@android:color/white"
+                    android:shadowColor="@android:color/black"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="2" />
+
+                <!-- EMF Bars (simulating LED bars) -->
+                <LinearLayout
+                    android:id="@+id/emf_bars_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_below="@id/text_emf_unit"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <!-- Left Bars -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:gravity="end"
+                        android:paddingEnd="4dp">
+
+                        <View
+                            android:id="@+id/emf_bar_1"
+                            android:layout_width="8dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="2dp"
+                            android:background="@drawable/emf_bar_off" />
+
+                        <View
+                            android:id="@+id/emf_bar_2"
+                            android:layout_width="8dp"
+                            android:layout_height="30dp"
+                            android:layout_marginEnd="2dp"
+                            android:background="@drawable/emf_bar_off" />
+
+                        <View
+                            android:id="@+id/emf_bar_3"
+                            android:layout_width="8dp"
+                            android:layout_height="40dp"
+                            android:layout_marginEnd="2dp"
+                            android:background="@drawable/emf_bar_off" />
+
+                        <View
+                            android:id="@+id/emf_bar_4"
+                            android:layout_width="8dp"
+                            android:layout_height="50dp"
+                            android:layout_marginEnd="2dp"
+                            android:background="@drawable/emf_bar_off" />
+
+                        <View
+                            android:id="@+id/emf_bar_5"
+                            android:layout_width="8dp"
+                            android:layout_height="60dp"
+                            android:background="@drawable/emf_bar_off" />
+                    </LinearLayout>
+
+                    <!-- Center Indicator -->
+                    <View
+                        android:id="@+id/emf_center_indicator"
+                        android:layout_width="4dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@android:color/white" />
+
+                    <!-- Right Bars -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:paddingStart="4dp">
+
+                        <View
+                            android:id="@+id/emf_bar_6"
+                            android:layout_width="8dp"
+                            android:layout_height="60dp"
+                            android:layout_marginStart="2dp"
+                            android:background="@drawable/emf_bar_off" />
+
+                        <View
+                            android:id="@+id/emf_bar_7"
+                            android:layout_width="8dp"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="2dp"
+                            android:background="@drawable/emf_bar_off" />
+
+                        <View
+                            android:id="@+id/emf_bar_8"
+                            android:layout_width="8dp"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="2dp"
+                            android:background="@drawable/emf_bar_off" />
+
+                        <View
+                            android:id="@+id/emf_bar_9"
+                            android:layout_width="8dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="2dp"
+                            android:background="@drawable/emf_bar_off" />
+
+                        <View
+                            android:id="@+id/emf_bar_10"
+                            android:layout_width="8dp"
+                            android:layout_height="20dp"
+                            android:layout_marginStart="2dp"
+                            android:background="@drawable/emf_bar_off" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- EMF Sensitivity Control -->
+                <SeekBar
+                    android:id="@+id/emf_sensitivity_seekbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/emf_bars_container"
+                    android:layout_marginTop="16dp"
+                    android:max="100"
+                    android:progress="50"
+                    android:progressTint="?attr/colorPrimary"
+                    android:thumbTint="?attr/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/text_emf_sensitivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/emf_sensitivity_seekbar"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/emf_sensitivity_medium"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/white"
+                    android:shadowColor="@android:color/black"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="2" />
+            </RelativeLayout>
+
+            <!-- EMF Control Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:paddingTop="16dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_emf_start"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/emf_start_detection"
+                    style="@style/Widget.Material3.Button.ElevatedButton"
+                    app:icon="@drawable/ic_trends" />
+
+                <Space
+                    android:layout_width="12dp"
+                    android:layout_height="wrap_content" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_emf_stop"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/emf_stop_detection"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    app:icon="@drawable/ic_settings" />
+            </LinearLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
