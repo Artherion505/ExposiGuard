@@ -8,23 +8,18 @@ plugins {
 }
 apply plugin: 'com.google.dagger.hilt.android'
 
-// Cargar propiedades del keystore para firma de release (opcional)
-def keystorePropertiesFile = rootProject.file('keystore.properties')
-def keystoreProperties = new Properties()
-if (keystorePropertiesFile.exists()) {
-    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-}
+// Keystore configuration removed for security - use local.properties or CI/CD variables
 
 android {
     namespace 'com.exposiguard.app'
-    compileSdk 35  // Actualizado para Android 15
+    compileSdk 35  // Updated for Android 15
 
     defaultConfig {
         applicationId "com.exposiguard.app"
         minSdk 21
-    targetSdk 35  // Actualizado para Android 15
-    versionCode 9
-    versionName "1.0.9"
+        targetSdk 35  // Updated for Android 15
+        versionCode 9
+        versionName "1.0.9"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -36,28 +31,10 @@ android {
         }
     }
 
-    // Definir signingConfigs antes de buildTypes
-    signingConfigs {
-        release {
-            if (keystoreProperties.containsKey('storeFile')) {
-                storeFile rootProject.file(keystoreProperties['storeFile'])
-                storePassword keystoreProperties['storePassword']
-                keyAlias keystoreProperties['keyAlias']
-                keyPassword keystoreProperties['keyPassword']
-            }
-        }
-    }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
-            // Removido signingConfig para F-Droid (F-Droid firma los APKs)
-        }
-        github {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
-            signingConfig signingConfigs.release
         }
         debug {
             minifyEnabled false
@@ -89,13 +66,6 @@ android {
 
     testOptions {
         unitTests.includeAndroidResources = true
-        unitTests.all {
-            it.systemProperty 'robolectric.dependency.repo.url', 'https://repo1.maven.org/maven2'
-            it.systemProperty 'robolectric.offline', 'true'
-            it.systemProperty 'robolectric.enabledSdks', '35'
-            it.exclude 'com/exposiguard/app/repository/ExposureRepositoryTest.class'
-            it.exclude 'com/exposiguard/app/repository/ExposureRepositoryBackfillTest.class'
-        }
     }
 
     // Nota: Evitamos usar APIs de Gradle deprecated como Configuration.fileCollection(Spec).
