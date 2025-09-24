@@ -5,12 +5,11 @@ plugins {
     id 'com.google.devtools.ksp'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
-    id 'com.github.triplet.play'
 }
 apply plugin: 'com.google.dagger.hilt.android'
 
-// Cargar propiedades del keystore para firma de release lo antes posible
-def keystorePropertiesFile = rootProject.file('Propiedad de Artherion/keystore.properties')
+// Cargar propiedades del keystore para firma de release (opcional)
+def keystorePropertiesFile = rootProject.file('keystore.properties')
 def keystoreProperties = new Properties()
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
@@ -41,7 +40,7 @@ android {
     signingConfigs {
         release {
             if (keystoreProperties.containsKey('storeFile')) {
-                storeFile rootProject.file("Propiedad de Artherion/${keystoreProperties['storeFile']}")
+                storeFile rootProject.file(keystoreProperties['storeFile'])
                 storePassword keystoreProperties['storePassword']
                 keyAlias keystoreProperties['keyAlias']
                 keyPassword keystoreProperties['keyPassword']
@@ -128,18 +127,3 @@ dependencies {
 
     // Dependencias de test eliminadas porque se han removido las pruebas del proyecto
 }
-
-// Configuración de Gradle Play Publisher
-play {
-    // Usar cuenta de servicio si existe archivo en tools/play-status/service_account.json
-    def saFile = rootProject.file('tools/play-status/service_account.json')
-    if (saFile.exists()) {
-        serviceAccountCredentials.set(saFile)
-    } else if (System.getenv('GOOGLE_APPLICATION_CREDENTIALS')) {
-        serviceAccountCredentials.set(new File(System.getenv('GOOGLE_APPLICATION_CREDENTIALS')))
-    }
-    track.set('closed')
-    defaultToAppBundles.set(true)
-}
-
-// Las release notes se ponen en src/main/play/release-notes/<lang>/default.txt
