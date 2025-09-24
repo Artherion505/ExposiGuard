@@ -1,0 +1,1 @@
+Correcciones de scroll e insets en EMF y Análisis de Tendencias. Compatibilidad Android 15. Mejoras menores de estabilidad.

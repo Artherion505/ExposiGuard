@@ -1,0 +1,595 @@
+<resources>
+    <string name="app_name">ExposiGuard</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_wifi">WiFi Exposure</string>
+    <string name="menu_bluetooth">Bluetooth</string>
+    <string name="menu_sar">SAR Calculator</string>
+    <string name="menu_noise">Noise Monitoring</string>
+    <string name="menu_health">Health Data</string>
+    <string name="menu_trends">Trends Analysis</string>
+    <string name="menu_emf">EMF</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_ambient_rf">Ambiente RF</string>
+    <string name="nav_header_title">ExposiGuard</string>
+    <string name="nav_header_subtitle">Monitor your exposure</string>
+    <string name="nav_header_desc">App logo</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- Explicaciones de permisos -->
+    <string name="permission_location_fine_explanation">Se necesita acceso a la ubicación precisa para detectar redes WiFi cercanas y calcular la exposición a radiación electromagnética.</string>
+    <string name="permission_location_coarse_explanation">Se necesita acceso aproximado a la ubicación para detectar redes WiFi cercanas.</string>
+    <string name="permission_location_background_explanation">Se necesita acceso a la ubicación en segundo plano para monitorear la exposición continua a radiación electromagnética.</string>
+    <string name="permission_wifi_state_explanation">Se necesita acceso al estado de WiFi para detectar redes disponibles y medir la intensidad de señal.</string>
+    <string name="permission_wifi_change_explanation">Se necesita cambiar el estado de WiFi para escanear redes disponibles.</string>
+    <string name="permission_network_state_explanation">Se necesita acceso al estado de red para monitorear conexiones de datos móviles.</string>
+    <string name="permission_phone_state_explanation">Se necesita acceso al estado del teléfono para obtener información de la red celular y calcular exposición SAR.</string>
+    <string name="permission_bluetooth_explanation">Se necesita acceso a Bluetooth para detectar dispositivos cercanos y medir exposición.</string>
+    <string name="permission_bluetooth_admin_explanation">Se necesita administración de Bluetooth para escanear dispositivos y gestionar conexiones.</string>
+    <string name="permission_bluetooth_connect_explanation">Se necesita conectar a dispositivos Bluetooth para medir exposición.</string>
+    <string name="permission_bluetooth_scan_explanation">Se necesita escanear dispositivos Bluetooth para detectar exposición a radiación.</string>
+    <string name="permission_audio_explanation">Se necesita acceso al micrófono para medir niveles de ruido ambiental (opcional).</string>
+    <string name="permission_activity_explanation">Se necesita acceso a la actividad física para correlacionar con exposición a radiación (opcional).</string>
+    <string name="permission_sensors_explanation">Se necesita acceso a sensores corporales para mediciones de salud relacionadas (opcional).</string>
+    <string name="permission_phone_numbers_explanation">Se necesita acceso a números de teléfono para información detallada de la red (opcional).</string>
+    <string name="permission_health_heart_rate_explanation">Se necesita acceso a la frecuencia cardíaca para correlacionar con exposición a radiación (opcional).</string>
+    <string name="permission_health_steps_explanation">Se necesita acceso a los pasos para análisis de actividad física (opcional).</string>
+    <string name="permission_health_sleep_explanation">Se necesita acceso a datos de sueño para análisis de salud (opcional).</string>
+
+    <!-- Mensajes de permisos -->
+    <string name="permissions_required_title">Permisos Requeridos</string>
+    <string name="permissions_required_message">ExposiGuard necesita los siguientes permisos para funcionar correctamente:</string>
+    <string name="permissions_grant">Otorgar Permisos</string>
+    <string name="permissions_later">Más Tarde</string>
+    <string name="permissions_settings">Ir a Configuración</string>
+    <string name="permissions_settings_message">Algunos permisos fueron denegados. Por favor, ve a Configuración > Aplicaciones > ExposiGuard > Permisos para otorgarlos manualmente.</string>
+
+    <!-- Niveles de riesgo (i18n) -->
+    <string name="risk_low">Riesgo Bajo</string>
+    <string name="risk_moderate">Riesgo Moderado</string>
+    <string name="risk_high">Riesgo Alto</string>
+    <string name="risk_critical">Crítico</string>
+
+    <!-- Niveles de semáforo EMF: removidos strings no usados (se usan contentDescriptions semaphore_light_*) -->
+
+    <!-- Recomendaciones EMF por nivel de riesgo: eliminadas (se usan listas emf_rec_*) -->
+
+    <!-- Recomendaciones EMF detalladas -->
+    <string name="emf_rec_low_1">Mantenga la distancia segura de dispositivos</string>
+    <string name="emf_rec_low_2">Use auriculares con cable cuando sea posible</string>
+    <string name="emf_rec_moderate_1">Reduzca el tiempo de exposición</string>
+    <string name="emf_rec_moderate_2">Mantenga al menos 30cm de distancia</string>
+    <string name="emf_rec_moderate_3">Use modo avión cuando no necesite conectividad</string>
+    <string name="emf_rec_high_1">Limite el uso a menos de 2 horas diarias</string>
+    <string name="emf_rec_high_2">Mantenga distancia mínima de 1 metro</string>
+    <string name="emf_rec_high_3">Considere usar protectores EMF</string>
+    <string name="emf_rec_critical_1">Suspenda inmediatamente el uso prolongado</string>
+    <string name="emf_rec_critical_2">Consulte con especialista en radiación</string>
+    <string name="emf_rec_critical_3">Use equipos con certificación de baja emisión</string>
+    <string name="emf_rec_default">Monitoree regularmente su exposición</string>
+
+    <!-- Recomendaciones WiFi por nivel de riesgo: eliminadas por no uso -->
+    <string name="sar_exposure_standard">Estándar de exposición</string>
+    <string name="sar_limit_prefix">Límite:</string>
+    <string name="sar_body_part">Parte del cuerpo</string>
+    <string name="sar_signal_strength">Intensidad de señal</string>
+    <string name="sar_distance_to_source">Distancia a la fuente</string>
+    <string name="sar_calculate_btn">Calcular SAR</string>
+    <string name="sar_results_title">Resultados SAR</string>
+    <string name="sar_calculated_label">SAR calculado:</string>
+    <string name="sar_risk_level">Nivel de riesgo:</string>
+    <string name="sar_safety_margin">Margen de seguridad:</string>
+    <string name="sar_history_title">Histórico SAR</string>
+    <string name="sar_history_summary_placeholder">Promedio/TWA: --  •  Máx: --</string>
+    <string name="sar_profile_info">El cálculo usa tu perfil guardado en Configuración.</string>
+    <string name="sar_calc_params_title">Parámetros de cálculo</string>
+    <string name="range_5h">5h</string>
+    <string name="range_24h">24h</string>
+    <string name="range_30d">30d</string>
+
+    <!-- SAR format resources -->
+    <string name="sar_signal_value_format">%1$.0f dBm</string>
+    <string name="sar_distance_value_format">%1$.1f m</string>
+    <string name="sar_limit_value_format">Límite: %1$.1f W/kg</string>
+    <string name="sar_factor_value_format">Factor: %1$.1f</string>
+
+    <!-- Settings fragment texts -->
+    <string name="settings_title">⚙️ Configuración de ExposiGuard</string>
+    <string name="settings_user_profile">👤 Perfil de Usuario</string>
+    <string name="settings_weight_hint">Peso (kg)</string>
+    <string name="settings_height_hint">Altura (cm)</string>
+    <string name="settings_bmi_info" formatted="false">IMC: %1$.1f | Categoría: %2$s</string>
+    <string name="settings_bmi_error">IMC: Error | Categoría: --</string>
+    <string name="settings_standard_hint">Estándar de Exposición</string>
+    <string name="settings_btn_calc_bmi">📊 Calcular IMC</string>
+    <string name="settings_btn_save_profile">💾 Guardar Perfil</string>
+    <string name="settings_monitoring_title">📡 Monitoreo Continuo</string>
+    <string name="settings_monitoring_switch">Monitoreo Continuo de EMF</string>
+    <string name="settings_monitoring_desc">Activa el monitoreo automático de todas las métricas EMF cada 5 minutos para un seguimiento continuo sin intervención manual.</string>
+    <string name="settings_interval_hint">Intervalo de Monitoreo (minutos)</string>
+    <string name="settings_averaging_window_hint">Ventana de promediado (min)</string>
+    <string name="settings_averaging_window_value">30</string>
+    <string name="settings_appearance_title">🎨 Apariencia</string>
+    <string name="settings_light_mode_switch">Modo Claro</string>
+    <string name="settings_light_mode_desc">Activa el modo claro para una interfaz con colores brillantes. El modo oscuro es el predeterminado.</string>
+    <string name="settings_battery_info">🔋 El monitoreo continuo puede afectar la duración de la batería. Se recomienda usar solo cuando sea necesario.</string>
+    <string name="settings_interval_value">5</string>
+
+    <!-- Language settings -->
+    <string name="settings_language_title">🌐 Idioma de la Aplicación</string>
+    <string name="settings_language_hint">Seleccionar Idioma</string>
+    <string name="settings_language_description">Cambia el idioma de toda la aplicación. Por defecto: Español</string>
+    <string name="language_spanish">Español</string>
+    <string name="language_english">English</string>
+    <string name="language_changed_title">Idioma Cambiado</string>
+    <string name="language_changed_message">El idioma se cambiará al reiniciar la aplicación</string>
+    <string name="language_restart_now">Reiniciar Ahora</string>
+    <string name="language_restart_later">Más Tarde</string>
+
+    <!-- Nombres de grupos de permisos -->
+    <string name="permission_group_basic_location">Ubicación Básica</string>
+    <string name="permission_group_background_location">Ubicación en Segundo Plano</string>
+    <string name="permission_group_bluetooth">Bluetooth</string>
+    <string name="permission_group_phone">Teléfono</string>
+    <string name="permission_group_body_sensors">Sensores Corporales</string>
+    <string name="permission_group_audio">Audio</string>
+
+    <!-- Explicaciones de grupos de permisos -->
+    <string name="permission_explanation_basic_location">Necesitamos acceso básico a tu ubicación para detectar redes WiFi cercanas.</string>
+    <string name="permission_explanation_background_location">Para monitorear la radiación continua, necesitamos acceso a ubicación incluso cuando la app está cerrada.</string>
+    <string name="permission_explanation_bluetooth">El acceso a Bluetooth nos permite detectar dispositivos cercanos y medir su radiación.</string>
+    <string name="permission_explanation_phone">Necesitamos información básica del teléfono para calcular el SAR (tasa de absorción específica).</string>
+    <string name="permission_explanation_body_sensors">Los sensores corporales nos ayudan a calcular con mayor precisión la absorción de radiación.</string>
+    <string name="permission_explanation_audio">El acceso al micrófono nos permite detectar campos electromagnéticos ambientales.</string>
+
+    <!-- Mensajes de log y debug -->
+    <string name="log_permission_result_received">🔄 RESULTADO del diálogo de permisos recibido: %s</string>
+    <string name="log_processing_results">Procesando resultados...</string>
+    <string name="log_single_permission_result">📨 RESULTADO permiso individual: %s</string>
+    <string name="log_main_activity_init">onCreate: Inicializando MainActivity</string>
+    <string name="log_permission_manager_init">PermissionManager inicializado</string>
+    <string name="log_nav_host_not_found">NavHostFragment not found!</string>
+    <string name="log_post_create_verifying_permissions">onPostCreate: Verificando permisos</string>
+    <string name="log_user_grant_permissions">Usuario hizo clic en \'Grant Permissions\'</string>
+    <string name="log_starting_sequential_permissions">=== INICIANDO SISTEMA SECUENCIAL DE PERMISOS ===</string>
+    <string name="log_group_completed">✅ Todos los grupos principales procesados, verificando salud...</string>
+    <string name="log_skipping_group">⏭️ Saltando \'%s\' - requiere permisos previos no otorgados</string>
+    <string name="log_group_already_has_permissions">✅ Grupo \'%s\' ya tiene todos los permisos</string>
+    <string name="log_processing_group" formatted="false">🔄 Procesando grupo \'%1$s\' - Permisos faltantes: %2$s</string>
+    <string name="log_already_requesting_permissions">Ya se está solicitando permisos, ignorando...</string>
+
+    <!-- Mensajes adicionales -->
+    <string name="permissions_limited_features">Algunas funciones estarán limitadas sin permisos</string>
+
+    <!-- Mensajes de diálogo de permisos -->
+    <string name="permission_count_required">• %d permisos requeridos\n</string>
+    <string name="permission_count_optional">• %d permisos opcionales\n</string>
+    <string name="permission_count_health">• %d permisos de salud\n</string>
+
+    <!-- Mensajes de error -->
+    <string name="error_navigation_setup">Error setting up navigation</string>
+    <string name="error_navigation_item_handling">Navigation item handling failed</string>
+    <string name="error_support_navigate_up">Error in onSupportNavigateUp</string>
+
+    <!-- Mensajes del EMFMonitoringWorker -->
+    <string name="worker_monitoring_completed">Monitoreo completado: %1$d redes WiFi, %2$d dispositivos Bluetooth, %3$d lecturas</string>
+    <string name="worker_data_changed_emitted">Evento DataChanged emitido para actualizar UI</string>
+    <string name="worker_data_changed_failed">Error al emitir evento DataChanged</string>
+    <string name="worker_monitoring_failed">Monitoreo fallido</string>
+
+    <!-- Mensajes de GeneralViewModel -->
+    <string name="health_heart_rate_label">Frecuencia cardíaca: %s</string>
+
+    <!-- Textos hardcodeados de layouts - Home Fragment -->
+    <string name="home_current_status">Estado actual</string>
+    <string name="home_calculating">Calculando</string>
+    <string name="home_analyzing_exposure">Analizando tu exposición</string>
+    <string name="home_view_emf_detail">Ver detalle EMF</string>
+
+    <!-- Textos hardcodeados de layouts - WiFi Fragment -->
+    <string name="wifi_emf_fields">⚡ Campos Electromagnéticos</string>
+    <string name="wifi_emf_info_placeholder">Información EMF aparecerá aquí</string>
+    <string name="wifi_wifi_label">WiFi</string>
+    <string name="wifi_dash_placeholder">--</string>
+    <string name="wifi_retry">Reintentar</string>
+    <string name="wifi_network_info">Información de redes</string>
+    <string name="wifi_mobile_network">📱 Telefonía Móvil</string>
+    <string name="wifi_mobile_info_placeholder">Información de telefonía aparecerá aquí</string>
+    <string name="wifi_bluetooth_devices">🎧 Dispositivos Bluetooth</string>
+    <string name="wifi_bluetooth_placeholder">Dispositivos Bluetooth aparecerán aquí</string>
+    <string name="wifi_filter_ssid_hint">Filtrar SSID</string>
+    <string name="wifi_initializing_scan">Inicializando escaneo WiFi...</string>
+    <string name="wifi_loading_network_info">Cargando información de red...</string>
+    <string name="wifi_searching_bluetooth">Buscando dispositivos Bluetooth...</string>
+    <string name="wifi_error_initialization">Error al inicializar:</string>
+    <string name="wifi_telephony_permissions_required">Se requieren permisos para detectar señales de telefonía</string>
+    <string name="wifi_bluetooth_permissions_required">Se requieren permisos para detectar dispositivos Bluetooth</string>
+    <string name="wifi_location_disabled">📍 Ubicación del sistema desactivada\n\nActívala para mejorar el escaneo Wi‑Fi y celular.</string>
+    <string name="wifi_permissions_error">🔒 Error de permisos\n\n</string>
+    <string name="wifi_bluetooth_permissions_error">🔒 Error de permisos de Bluetooth</string>
+    <string name="wifi_detection_error">⚠️ Error al detectar redes WiFi\n\n</string>
+    <string name="wifi_bluetooth_detection_error">⚠️ Error al detectar dispositivos Bluetooth</string>
+        <string name="wifi_emf_calculation_error">⚠️ Error al calcular EMF:</string>
+    <string name="wifi_throttling_comment">Sistema de throttling para actualizaciones de UI</string>
+    <string name="wifi_scan_comment">Lanzar escaneos Wi‑Fi periódicos (respetará throttling del sistema)</string>
+    <string name="wifi_location_comment">Si ubicación del sistema está desactivada, avisar pero seguir mostrando lo disponible</string>
+    <string name="wifi_scan_error">Error al iniciar escaneo de WiFi (posible throttling en Android 10+); usando últimos resultados</string>
+    <string name="wifi_unexpected_error">Error inesperado al escanear WiFi</string>
+    <string name="wifi_cellular_error">📡 Información de red celular no disponible\n• Error:</string>
+    <string name="wifi_scan_error_short">Error al escanear redes:</string>
+    <string name="wifi_network_error">📡 Error al obtener información de red:</string>
+    <string name="wifi_emf_error">⚠️ Error al calcular EMF:</string>
+    <string name="wifi_no_networks_detected">No se detectaron redes WiFi cercanas</string>
+    <string name="wifi_no_bluetooth_devices">No se detectaron dispositivos Bluetooth</string>
+    <string name="wifi_permissions_error_full">🔒 Error de permisos\n\nNo se pueden escanear redes WiFi debido a restricciones de permisos.\n\nAsegúrate de haber concedido los permisos de ubicación.</string>
+    <string name="wifi_detection_error_full">⚠️ Error al detectar redes WiFi\n\nVerifica que el WiFi esté habilitado y que tengas permisos de ubicación.\n\nError: %s</string>
+    <string name="wifi_no_networks_detected_with_hint">No se detectaron redes WiFi cercanas%s</string>
+    <string name="wifi_error_loading_data">Error al cargar datos: %s</string>
+    <string name="wifi_cellular_networks_tip">💡 Tip: Estas son las redes celulares que tu dispositivo puede detectar</string>
+    <string name="wifi_cellular_info_title">📡 Información de Red Celular (como Atalaya):</string>
+    <string name="wifi_carrier_label">• Operador: %s</string>
+    <string name="wifi_network_type_label">• Tipo de Red: %s</string>
+    <string name="wifi_operator_code_label">• Código: %s</string>
+    <string name="wifi_airplane_mode_label">• Modo Avión: Activado</string>
+    <string name="wifi_real_time_update">💡 Información actualizada en tiempo real</string>
+    <string name="wifi_bluetooth_devices_detected">Dispositivos Bluetooth detectados: %d</string>
+    <string name="wifi_device_type_headphones">Audífonos/Auriculares</string>
+    <string name="wifi_device_type_phone">Teléfono</string>
+    <string name="wifi_device_type_computer">Computadora</string>
+    <string name="wifi_device_type_generic">Dispositivo genérico</string>
+    <string name="wifi_disabled_hint">\n\nWi‑Fi está desactivado. Actívalo para escanear redes.</string>
+    <string name="wifi_carrier_networks_available">📡 Redes de Operadores Móviles Disponibles:</string>
+    <string name="wifi_current_cellular_network">📱 Tu Red Celular Actual:</string>
+    <string name="wifi_sar_calculation">🔬 Cálculo SAR (Absorción Específica):</string>
+    <string name="wifi_calculated_sar">• SAR calculado: %.3f W/kg</string>
+    <string name="wifi_exposure_limit" formatted="false">• Límite %s: %.1f W/kg</string>
+    <string name="wifi_risk_level">• Nivel de riesgo: %s</string>
+    <string name="wifi_absorption_factor">• Factor de absorción: %.3f</string>
+    <string name="wifi_enable_action">Activar</string>
+    <string name="wifi_scan_requested">Escaneo solicitado…</string>
+    <string name="home_updated">Actualizado</string>
+
+    <!-- Ambient RF (user-provided) -->
+    <string name="ambient_rf_title">Ambiente RF (proveído por usuario)</string>
+    <string name="ambient_rf_fm_strong">FM con señal clara</string>
+    <string name="ambient_rf_fm_weak">FM con señal débil</string>
+    <string name="ambient_rf_am_strong">AM con señal clara</string>
+    <string name="ambient_rf_tv_open">TV abierta (canales estables)</string>
+    <string name="ambient_rf_tv_antenna">¿Televisión por antena?</string>
+    <string name="ambient_rf_tv_antenna_channels">Canales por antena</string>
+    <string name="ambient_rf_environment">Entorno</string>
+    <string name="ambient_rf_env_urban">Urbano</string>
+    <string name="ambient_rf_env_suburban">Suburbano</string>
+    <string name="ambient_rf_env_rural">Rural</string>
+    <string name="ambient_rf_save">Guardar</string>
+    <string name="ambient_rf_preview">Previsualización del índice ambiental</string>
+    <string name="ambient_rf_preview_value" formatted="false">Índice Ambiental RF: %1$d/100</string>
+    <string name="saved_ok">Guardado</string>
+    <string name="ambient_rf_include_in_home">Incluir en Home (experimental)</string>
+    <string name="ambient_rf_estimation_profile">Perfil de estimación</string>
+    <string name="ambient_rf_profile_conservative">Conservador</string>
+    <string name="ambient_rf_profile_average">Promedio</string>
+    <string name="ambient_rf_profile_max">Máximo</string>
+
+    <!-- Textos hardcodeados de layouts - EMF Fragment -->
+    <string name="emf_summary_title">EMF - Resumen</string>
+    <string name="emf_limit_label">Límite: --</string>
+    <string name="emf_total_estimated">Total estimado: --</string>
+    <string name="emf_breakdown">Desglose: --</string>
+    <string name="emf_recommendations">Recomendaciones: --</string>
+    <string name="emf_monthly_summary">Resumen mensual</string>
+    <string name="emf_breakdown_format" formatted="false">Desglose:\n• Torres: %.3f W/kg\n• Uso del teléfono: %.3f W/kg\n• WiFi: %.3f W/kg\n• Bluetooth: %.3f W/kg</string>
+    <string name="emf_breakdown_with_broadcast_format" formatted="false">Desglose:\n• Torres: %.3f W/kg\n• Uso del teléfono: %.3f W/kg\n• Radio/TV: %.3f W/kg\n• WiFi: %.3f W/kg\n• Bluetooth: %.3f W/kg</string>
+    <string name="emf_component_broadcast">Radio/TV</string>
+    <string name="emf_recommendations_prefix">Recomendaciones:\n- </string>
+    <string name="emf_error">Error: %s</string>
+    <string name="emf_dialog_date">Fecha:</string>
+    <string name="emf_dialog_total_sar">Total (SAR-like):</string>
+    <string name="emf_dialog_towers_sar">Torres/Phone SAR:</string>
+    <string name="emf_dialog_wifi_norm">WiFi norm.:</string>
+
+    <!-- Textos hardcodeados de layouts - SAR Fragment -->
+    <string name="sar_fcc_label">FCC</string>
+    <string name="sar_factor_label">Factor: 1.0</string>
+    <string name="sar_signal_strength_value">-60 dBm</string>
+    <string name="sar_distance_value">1.0 m</string>
+    <string name="sar_sar_value">0.000 W/kg</string>
+    <string name="sar_safety_margin_label">Margen de seguridad:</string>
+    <string name="sar_safety_margin_value">0.0%</string>
+
+    <!-- Textos hardcodeados de layouts - Bluetooth Fragment -->
+    <string name="bluetooth_bluetooth_label">Bluetooth</string>
+    <string name="bluetooth_scan">Scan Bluetooth</string>
+    <string name="bluetooth_devices_found">0 devices found</string>
+    <string name="bluetooth_no_devices">No Bluetooth devices found. Tap "Scan Bluetooth" to start scanning.</string>
+    <string name="bluetooth_allow_access">Permitir acceso a uso</string>
+    <string name="bluetooth_hand_absorption_today">Absorción mano (hoy):</string>
+    <string name="bluetooth_hand_absorption_value">0.0 J/kg</string>
+    <string name="bluetooth_sar_value">0.000 W/kg</string>
+    <string name="bluetooth_devices_count">%1$d dispositivos</string>
+
+    <!-- Textos hardcodeados de layouts - Noise Fragment -->
+    <string name="noise_monitor_title">Medidor de contaminación auditiva</string>
+    <string name="noise_current_level">Nivel actual: --</string>
+    <string name="noise_result">Resultado: --</string>
+    <string name="noise_index">Índice de ruido: --</string>
+    <string name="noise_scale">0   20   40   60   80   100+ dB</string>
+    <string name="noise_start_monitoring">Iniciar monitoreo</string>
+    <string name="noise_quick_measurement">Medición rápida</string>
+    <string name="noise_permission_required">🔒 Se requiere permiso de micrófono para monitorear ruido.</string>
+    <string name="noise_monitoring_failed">⚠️ No se pudo iniciar el monitoreo de ruido.</string>
+    <string name="noise_stop_monitoring">Detener monitoreo</string>
+    <string name="noise_measurement_failed">No se pudo iniciar la medición</string>
+    <string name="noise_current_level_format">Nivel actual: %.0f</string>
+    <string name="noise_result_format" formatted="false">Resultado: Promedio=%.0f • Pico=%.0f (amplitud relativa)</string>
+    <string name="noise_index_format" formatted="false">Índice de ruido: %d/100 (%s)</string>
+
+    <!-- Textos hardcodeados de layouts - Settings Fragment -->
+    <string name="settings_weight_value">70</string>
+    <string name="settings_height_value">170</string>
+    <string name="settings_fcc_usa">FCC (USA)</string>
+    <string name="settings_spanish">Español</string>
+    <string name="settings_monitoring_tabs">Pestañas a incluir en monitoreo continuo</string>
+    <string name="settings_home_tab">Home</string>
+    <string name="settings_wifi_tab">WiFi</string>
+    <string name="settings_emf_tab">EMF</string>
+    <string name="settings_noise_tab">Contaminación auditiva</string>
+    <string name="settings_experimental_tab">Experimental</string>
+    <string name="settings_include_wifi_normalized">Incluir WiFi normalizado en el total</string>
+    <string name="settings_estimate_antenna_exposure">Estimar exposición ambiente por antenas</string>
+    <string name="settings_experimental_warning">Estas funciones pueden variar en precisión y consumo de batería.</string>
+    <string name="settings_show_debug_chip">Mostrar chip de depuración en Home</string>
+    <string name="settings_realtime_telephony">Actualizaciones de telefonía en tiempo real (experimental)</string>
+
+    <!-- Textos hardcodeados de layouts - Health Fragment -->
+    <string name="health_loading_data">Cargando datos de salud...</string>
+    <string name="health_integrations">Integraciones</string>
+    <string name="health_connect">Health Connect</string>
+    <string name="health_connect_smartwatch">Conectar Smartwatch</string>
+    <string name="health_actions">Acciones</string>
+    <string name="health_sync_smartwatch">Sincronizar Smartwatch</string>
+    <string name="health_update_data">Actualizar Datos</string>
+
+    <!-- Textos hardcodeados de layouts - Trends Fragment -->
+    <string name="trends_exposure_trends">Exposure Trends</string>
+    <string name="trends_wifi_sar_over_time">WiFi + SAR Exposure Over Time</string>
+
+    <!-- Textos dinámicos de HomeFragment -->
+    <string name="home_calculating_exposure">Calculando exposición...</string>
+    <string name="home_exposure_day">Exposición del día:</string>
+    <string name="home_no_measurements">0 mediciones</string>
+    <string name="home_safe">✅ SEGURO</string>
+    <string name="home_moderate">⚠️ MODERADO</string>
+    <string name="home_high">🟡 ALTO</string>
+    <string name="home_exceeding_limit">🔴 SUPERANDO LÍMITE</string>
+    <string name="home_very_high">🚨 MUY ALTO</string>
+    <string name="home_critical">🔴 CRÍTICO</string>
+    <string name="home_critical_message">¡Exposición muy alta! Toma medidas inmediatas</string>
+    <string name="home_high_message">Exposición elevada. Considera reducir la exposición</string>
+    <string name="home_safe_message">Tu exposición está dentro de límites seguros</string>
+    <string name="home_managers_not_initialized">Managers no inicializados correctamente</string>
+    <string name="home_error_setup_content">Error al configurar contenido:</string>
+    <string name="home_error_initializing">Error al inicializar:</string>
+    <string name="home_error_viewmodel">Error al crear ViewModel:</string>
+
+    <!-- Trends Fragment Resources -->
+    <string name="trends_error_context_unavailable">⚠️ Error: Contexto no disponible</string>
+    <string name="trends_error_initialization">⚠️ Error al inicializar: %1$s</string>
+    <string name="trends_error_loading_data">⚠️ Error al cargar datos de tendencias: %1$s</string>
+    <string name="trends_no_data_selected_window">📊 Sin datos en la ventana seleccionada</string>
+    <string name="trends_no_data_analysis">📊 No hay datos suficientes para análisis de tendencias</string>
+    <string name="trends_backfill_tag">(relleno 5 min)</string>
+    <string name="trends_point_tooltip">%1$s • %2$.3f W/kg %3$s</string>
+    <string name="trends_legend_backfill">Los puntos marcados con “%1$s” son datos rellenados en intervalos de 5 minutos para suavizar huecos del día.</string>
+    <string name="settings_force_backfill_debug">Forzar backfill (debug)</string>
+
+    <!-- WiFi Fragment EMF Display Resources -->
+    <string name="wifi_emf_total_exposure">🔋 Exposición EMF Total:</string>
+    <string name="wifi_emf_wifi_source">📶 WiFi:</string>
+    <string name="wifi_emf_bluetooth_source">🎧 Bluetooth:</string>
+    <string name="wifi_emf_cellular_source">📱 Celular:</string>
+    <string name="wifi_emf_risk_level">Nivel de Riesgo:</string>
+    <string name="wifi_emf_limit">Límite</string>
+    <string name="wifi_emf_percentage">Porcentaje:</string>
+    <string name="wifi_emf_recommendations">💡 Recomendaciones EMF:</string>
+
+    <!-- WiFi Fragment Permissions Resources -->
+    <string name="wifi_permissions_required_message">🔒 Se requieren permisos para detectar redes\n\nPermisos necesarios:\n• Ubicación precisa (para WiFi y redes celulares)\n• Estado del teléfono (para información de red celular)\n• Estado de red (para información de conectividad)\n• Bluetooth (para dispositivos Bluetooth)\n\nDespués, reinicia la aplicación.</string>
+
+    <!-- Home Fragment Resources -->
+    <string name="home_daily_exposure">Exposición del día:</string>
+    <string name="home_measurements">mediciones</string>
+    <string name="home_tooltip_daily_now">Muestra dos métricas:\n• Diario: promedio ponderado de hoy (W/kg)\n• Ahora: porcentaje instantáneo respecto al límite (FCC/ICNIRP)</string>
+    <string name="home_help">Ayuda</string>
+    <string name="home_debug_info_format" formatted="false">win:%1$dm • n=%2$d • gap≤%3$dm</string>
+    <string name="home_backfill_active">• Backfill activo</string>
+
+    <!-- Accesibilidad Semáforo -->
+    <string name="semaphore_light_red">Luz roja</string>
+    <string name="semaphore_light_yellow">Luz amarilla</string>
+    <string name="semaphore_light_green">Luz verde</string>
+
+    <!-- MainActivity Resources -->
+    <string name="main_health_permissions_message">Los datos de salud nos ayudan a personalizar los cálculos de exposición a radiación. Estos permisos requieren configuración adicional a través de Health Connect.</string>
+
+    <!-- Noise Fragment Resources -->
+    <string name="noise_level_critical">CRÍTICO</string>
+    <string name="noise_level_high">ALTO</string>
+    <string name="noise_level_moderate">MODERADO</string>
+    <string name="noise_level_low">BAJO</string>
+
+    <!-- WiFiManager Resources -->
+    <string name="wifi_signal_level">Nivel</string>
+    <string name="wifi_calculating_regular_exposure">Calcular exposición WiFi regular</string>
+    <string name="wifi_carrier_networks_higher_exposure">Redes de compañías telefónicas tienen mayor exposición</string>
+    <string name="wifi_calculating_headphones_exposure">Calcular exposición de audífonos inalámbricos</string>
+    <string name="wifi_get_exposure_stats">Obtiene estadísticas específicas de exposición</string>
+    <string name="wifi_bluetooth_device">Dispositivo Bluetooth</string>
+    <string name="wifi_current_signal">Señal actual</string>
+    <string name="wifi_basic_info_available">Información básica disponible</string>
+    <string name="wifi_check_location_permissions">Para detalles completos, verifica permisos de ubicación</string>
+    <string name="wifi_signal_info_unavailable">Información de señal no disponible</string>
+    <string name="wifi_insufficient_permissions">Permisos insuficientes para obtener intensidad de señal</string>
+    <string name="wifi_signal_error">Error al obtener información de señal</string>
+    <string name="wifi_results_updated">Resultados Wi‑Fi actualizados</string>
+
+    <!-- SAR Fragment Body Parts -->
+    <string name="sar_body_part_head">Cabeza</string>
+    <string name="sar_body_part_body">Cuerpo</string>
+    <string name="sar_body_part_hand">Mano</string>
+
+    <!-- SAR Fragment Messages -->
+    <string name="sar_updated">Actualizado</string>
+    <string name="sar_history_average">Promedio/TWA:</string>
+    <string name="sar_history_max">Máx:</string>
+
+    <!-- Trends Fragment Texts -->
+    <string name="trends_analysis_title">📊 Análisis de Tendencias de Exposición</string>
+    <string name="trends_user_profile">👤 Perfil del Usuario:</string>
+    <string name="trends_weight">• Peso:</string>
+    <string name="trends_height">• Altura:</string>
+    <string name="trends_status">• Estado:</string>
+    <string name="trends_configured">✅ Configurado</string>
+    <string name="trends_default_values">⚠️ Valores por defecto</string>
+    <string name="trends_exposure_stats">📈 Estadísticas de Exposición:</string>
+    <string name="trends_wifi_twa">• WiFi TWA:</string>
+    <string name="trends_sar_twa">• SAR TWA:</string>
+    <string name="trends_bluetooth_twa">• Bluetooth TWA:</string>
+    <string name="trends_max_exposure">• Exposición máxima total:</string>
+    <string name="trends_trend_analysis">📉 Análisis de Tendencias:</string>
+    <string name="trends_recommendations">💡 Recomendaciones:</string>
+    <string name="trends_rec_high_sar">• Alto nivel SAR - considera reducir exposición</string>
+    <string name="trends_rec_high_wifi">• Alta intensidad WiFi - mantén distancia de routers</string>
+    <string name="trends_rec_bluetooth">• Múltiples dispositivos Bluetooth - limita conexiones</string>
+    <string name="trends_rec_peaks">• Picos de exposición detectados - monitorea</string>
+    <string name="trends_rec_safe">• Niveles de exposición dentro de límites seguros</string>
+    <string name="trends_rec_configure">• Configura tu perfil para cálculos más precisos</string>
+    <string name="trends_no_chart_data">No hay datos disponibles para mostrar la gráfica</string>
+    <string name="trends_recommended_limit">Límite recomendado:</string>
+    <string name="trends_chart_summary">📊 Resumen de la Gráfica (SAR+BT):</string>
+    <string name="trends_max_sar_bt">• Máximo SAR+BT:</string>
+    <string name="trends_status_label">• Estado:</string>
+    <string name="trends_exceeding_limit">⚠️ SUPERANDO LÍMITE</string>
+    <string name="trends_within_limit">✅ DENTRO DEL LÍMITE</string>
+    <string name="trends_measurement_count">• Número de mediciones:</string>
+
+    <!-- Recursos adicionales para internacionalización -->
+    <string name="user_profile_title">Perfil del Usuario</string>
+    <string name="weight_label">Peso</string>
+    <string name="height_label">Altura</string>
+    <string name="status_label">Estado</string>
+    <string name="configured_label">Configurado</string>
+    <string name="exposure_label">Exposición</string>
+    <string name="trends_label">Tendencias</string>
+    <string name="safety_margin_label">Margen de Seguridad</string>
+    <string name="risk_label">Riesgo</string>
+    <string name="installed_label">instaladas</string>
+    <string name="available_label">disponibles</string>
+    <string name="no_data_available">No hay datos disponibles</string>
+
+    <!-- Sistema de unidades -->
+    <string name="units_system_title">Sistema de Unidades</string>
+    <string name="units_metric">Sistema Métrico (kg, cm)</string>
+    <string name="units_weight_kg">kg</string>
+    <string name="units_height_cm">cm</string>
+    <string name="units_height_in">in</string>
+
+    <!-- Mensajes de validación para unidades -->
+    <string name="weight_validation_metric">Ingrese un peso válido (%1$s)</string>
+    <string name="height_validation_metric">Ingrese una altura válida (%1$s)</string>
+    <string name="weight_range_metric">Peso debe estar entre 30-300 %1$s</string>
+    <string name="height_range_metric">Altura debe estar entre 100-250 %1$s</string>
+
+    <!-- Mensajes de error para Settings -->
+    <string name="error_weight_invalid">Ingrese un peso válido (%1$s)</string>
+    <string name="error_height_invalid">Ingrese una altura válida (%1$s)</string>
+    <string name="error_weight_range">Peso debe estar entre %1$s</string>
+    <string name="error_height_range">Altura debe estar entre %1$s</string>
+
+    <!-- Términos generales para internacionalización -->
+    <string name="term_average">promedio</string>
+    <string name="term_system">sistema</string>
+    <string name="term_metric">métrico</string>
+    <string name="term_category">categoría</string>
+    <string name="term_estimated">estimado</string>
+    <string name="term_head">cabeza</string>
+    <string name="term_body">cuerpo</string>
+    <string name="term_limbs">Extremidades</string>
+    <string name="wifi_security_error">Error de seguridad al escanear WiFi</string>
+    <string name="emf_total_estimated_format" formatted="false">Total estimado: %.3f W/kg (%.1f%%)</string>
+    <string name="imc_category_underweight">Bajo peso</string>
+    <string name="imc_category_normal">Normal</string>
+    <string name="imc_category_overweight">Sobrepeso</string>
+    <string name="imc_category_obese">Obeso</string>
+
+    <!-- Estado de escaneo WiFi -->
+    <string name="wifi_scanning_status">Escaneando…</string>
+
+    <!-- Comentarios del Fragment WiFi (Internacionalizados) -->
+    <string name="wifi_comment_ui_throttling">Sistema de throttling de actualización de UI</string>
+    <string name="wifi_comment_observe_wifi_changes">Observar cambios en las redes WiFi con throttling</string>
+    <string name="wifi_comment_observe_carrier_changes">Observar cambios en redes de compañías telefónicas con throttling</string>
+    <string name="wifi_comment_update_carriers_periodically">Actualizar información de carriers periódicamente con throttling</string>
+    <string name="wifi_comment_launch_periodic_scans">Lanzar escaneos periódicos de Wi-Fi (respetará el throttling del sistema)</string>
+    <string name="wifi_comment_observe_bluetooth_changes">Observar cambios en dispositivos Bluetooth con throttling</string>
+    <string name="wifi_comment_request_permissions">Solicitar permisos mínimos para WiFi si faltan; no bloquear por Bluetooth/telefonía</string>
+    <string name="wifi_comment_if_location_disabled">Si la ubicación del sistema está deshabilitada, notificar pero continuar mostrando datos disponibles</string>
+
+    <!-- Comentarios Generales (Internacionalizados) -->
+    <string name="comment_initialize_managers_async">Inicializar managers de forma asíncrona</string>
+    <string name="comment_initialize_basic_ui">Inicializar UI básica primero</string>
+    <string name="comment_initialize_managers_secondary_thread">Inicializar managers en hilo secundario</string>
+    <string name="comment_use_handler_initialize">Usar Handler para inicializar managers en un hilo secundario</string>
+    <string name="comment_initialize_managers_deferred">Inicializar managers de forma diferida para evitar bloqueo del hilo principal</string>
+    <string name="comment_initialize_permission_manager">Inicializar PermissionManager</string>
+    <string name="comment_initialize_celldata_repository">Inicializar CellDataRepository</string>
+    <string name="comment_load_persisted_data">Cargar datos persistidos al inicializar</string>
+
+    <!-- Bluetooth Fragment -->
+    <string name="bluetooth_updated">Actualizado</string>
+    <string name="bluetooth_grant_access_message">Concede acceso y regresa para actualizar</string>
+    <string name="bluetooth_status_on">On</string>
+    <string name="bluetooth_status_off">Off</string>
+
+    <!-- Error handling comments -->
+    <string name="comment_handle_unexpected_error">Manejar cualquier otro error inesperado</string>
+    <string name="comment_fallback_basic_calculation">Fallback a cálculo básico si hay error</string>
+    <string name="comment_placeholder_avoid_reference_error">Placeholder para evitar error de referencia hasta integrar tarjeta ambiente</string>
+    <string name="comment_configure_navcontroller_error_handling">Configurar el NavController con mejor manejo de errores</string>
+    <string name="comment_basic_error_handling">Manejo de error básico</string>
+    <string name="comment_error_opening_health_connect">Error abriendo Health Connect</string>
+    <string name="comment_clear_errors">Limpiar errores</string>
+    <string name="comment_error_saving_profile">Error guardando perfil</string>
+    <string name="comment_error_saving_profile_message">Error al guardar el perfil</string>
+    <string name="comment_error_calculating_bmi">Error calculando IMC</string>
+    <string name="comment_handle_errors">Manejar errores</string>
+    <string name="comment_error_recreate_activity">Si hay algún error, recurrir a recrear la actividad</string>
+    <string name="comment_fallback_show_error_message">Fallback: mostrar mensaje de error en lugar de crashear</string>
+    <string name="comment_log_error_no_crash">Log del error pero no crash la aplicación</string>
+
+    <!-- Initialization comments -->
+    <string name="comment_initialize_managers_background">Inicializar managers en hilo secundario</string>
+
+    <!-- WiFi Fragment Status Messages -->
+    <string name="wifi_location_permission_required">Se requiere permiso de ubicación para escanear WiFi</string>
+    <string name="wifi_initializing">Inicializando...</string>
+    <string name="wifi_ready">Listo para escanear</string>
+    <string name="wifi_manager_not_initialized">WiFi Manager no inicializado</string>
+    <string name="wifi_initialization_error">Error al inicializar WiFi Manager</string>
+    <string name="wifi_scanning">Escaneando redes WiFi...</string>
+    <string name="wifi_scan_failed">Error al escanear redes</string>
+    <string name="wifi_no_emf_detected">No se detectó EMF</string>
+    <string name="wifi_scan_completed">Escaneo completado</string>
+    <string name="wifi_update_error">Error al actualizar datos</string>
+    <string name="wifi_permission_denied">Permiso denegado</string>
+
+    <!-- WiFi Fragment Additional Status (defaults to avoid resource removal warnings) -->
+    <string name="wifi_getting_results">Obteniendo resultados…</string>
+    <string name="wifi_scan_throttling">Throttling de escaneo activo</string>
+    <string name="wifi_status_bt">BT:</string>
+    <string name="wifi_status_cell">Celular:</string>
+    <string name="wifi_status_off">Wi‑Fi apagado</string>
+    <string name="wifi_status_on">Wi‑Fi encendido</string>
+    <string name="wifi_status_wifi">Wi‑Fi:</string>
+    <string name="support_developer">Apoyar al desarrollador</string>
+</resources>

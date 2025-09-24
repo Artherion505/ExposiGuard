@@ -1,0 +1,396 @@
+package com.exposiguard.app.features.wifi.ui
+
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import androidx.core.cont                // Calcular SAR basado en operadores detectados
+                val sarManager = com.exposiguard.app.managers.SARManager(requireContext(), wiFiManager).ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import com.exposiguard.app.R
+import com.exposiguard.app.data.WiFiNetwork
+import com.exposiguard.app.databinding.FragmentWifiBinding
+import com.exposiguard.app.managers.CellDataRepository
+import com.exposiguard.app.managers.EMFManager
+import com.exposiguard.app.managers.UserProfileManager
+import com.exposiguard.app.managers.WiFiManager
+import com.exposiguard.app.repository.ExposureRepository
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
+import android.os.Looper
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+
+@AndroidEntryPoint
+class WiFiFragment : Fragment() {
+
+    private lateinit var binding: FragmentWifiBinding
+    @Inject lateinit var wiFiManager: WiFiManager
+    @Inject lateinit var emfManager: EMFManager
+    @Inject lateinit var exposureRepository: ExposureRepository
+
+    // UI update throttling system
+    private val uiUpdateHandler = Handler(Looper.getMainLooper())
+    private var lastWifiUpdate = 0L
+    private var lastBluetoothUpdate = 0L
+    private var lastCarrierUpdate = 0L
+    private val UPDATE_THROTTLE_MS = 500L // 500ms between updates for better responsiveness
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentWifiBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        if (!checkRequiredPermissions()) {
+            showPermissionRequiredMessage()
+            return
+        }
+
+        // getString(R.string.comment_initialize_basic_ui)
+        setupBasicUI()
+
+        // getString(R.string.comment_initialize_managers_async)
+        initializeManagersAsync()
+    }
+
+    private fun setupBasicUI() {
+        // Configurar UI básica mientras se inicializan los managers
+        binding.textWifi.text = getString(R.string.wifi_initializing_scan)
+        binding.textTelephony.text = getString(R.string.wifi_loading_network_info)
+        binding.textBluetooth.text = getString(R.string.wifi_searching_bluetooth)
+
+    // Botón de actualizar eliminado: usar el botón global en la toolbar
+    }
+
+    private fun initializeManagersAsync() {
+        val handler = android.os.Handler(android.os.Looper.getMainLooper())
+        Thread {
+            try {
+                // Los managers ya están inyectados por Hilt
+
+                // getString(R.string.comment_initialize_celldata_repository)
+                CellDataRepository.start(requireContext())
+
+                // Configurar observers en el hilo principal
+                handler.post {
+                    setupObservers()
+                    // Cargar datos iniciales
+                    loadWiFiData()
+                }
+            } catch (e: Exception) {
+                android.util.Log.e("WiFiFragment", "Error initializing managers", e)
+                handler.post {
+                    binding.textWifi.text = getString(R.string.wifi_error_initialization) + " ${e.message}"
+                }
+            }
+        }.start()
+    }
+
+    private fun checkRequiredPermissions(): Boolean {
+        val requiredPermissions = mutableListOf<String>()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requiredPermissions.add(Manifest.permission.ACCESS_FINE_LOCATION)
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            requiredPermissions.add(Manifest.permission.BLUETOOTH_SCAN)
+            requiredPermissions.add(Manifest.permission.BLUETOOTH_CONNECT)
+        } else {
+            requiredPermissions.add(Manifest.permission.BLUETOOTH)
+            requiredPermissions.add(Manifest.permission.BLUETOOTH_ADMIN)
+        }
+
+        // Agregar permisos de telefonía para detección de redes celulares
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requiredPermissions.add(Manifest.permission.READ_PHONE_STATE)
+        }
+        requiredPermissions.add(Manifest.permission.ACCESS_NETWORK_STATE)
+
+        return requiredPermissions.all { permission ->
+            ContextCompat.checkSelfPermission(requireContext(), permission) == PackageManager.PERMISSION_GRANTED
+        }
+    }
+
+    private fun showPermissionRequiredMessage() {
+        val permissionMessage = buildString {
+            append("🔒 Se requieren permisos para detectar redes\n\n")
+            append("Permisos necesarios:\n")
+            append("• Ubicación precisa (para WiFi y redes celulares)\n")
+            append("• Estado del teléfono (para información de red celular)\n")
+            append("• Estado de red (para información de conectividad)\n")
+            append("• Bluetooth (para dispositivos Bluetooth)\n\n")
+            append("Después, reinicia la aplicación.")
+        }
+
+        binding.textWifi.text = permissionMessage
+        binding.textTelephony.text = "Se requieren permisos para detectar señales de telefonía"
+        binding.textBluetooth.text = "Se requieren permisos para detectar dispositivos Bluetooth"
+    }
+
+    private fun setupObservers() {
+        // ${getString(R.string.wifi_comment_observe_wifi_changes)}
+        viewLifecycleOwner.lifecycleScope.launch {
+            wiFiManager.detectedNetworks.collect { networks ->
+                throttledWifiUpdate(networks)
+            }
+        }
+
+        // ${getString(R.string.wifi_comment_observe_carrier_changes)}
+        viewLifecycleOwner.lifecycleScope.launch {
+            wiFiManager.carrierNetworks.collect { carriers ->
+                throttledCarrierUpdate(carriers)
+            }
+        }
+
+        // Observar cambios en datos de red celular (como Atalaya)
+        viewLifecycleOwner.lifecycleScope.launch {
+            CellDataRepository.networkDataFlow.collect { networkData ->
+                updateCellularNetworkDisplay(networkData)
+            }
+        }
+
+        // ${getString(R.string.wifi_comment_update_carriers_periodically)}
+        viewLifecycleOwner.lifecycleScope.launch {
+            while (isActive) {
+                updateCarrierDisplay() // Actualizar sin parámetros
+                delay(30000) // Actualizar cada 30 segundos
+            }
+        }
+
+        // ${getString(R.string.wifi_comment_observe_bluetooth_changes)}
+        viewLifecycleOwner.lifecycleScope.launch {
+            wiFiManager.bluetoothDevices.collect { devices ->
+                throttledBluetoothUpdate(devices)
+            }
+        }
+    }
+
+    private fun throttledWifiUpdate(networks: List<com.exposiguard.app.data.WiFiNetwork>) {
+        val currentTime = System.currentTimeMillis()
+        if (currentTime - lastWifiUpdate >= UPDATE_THROTTLE_MS) {
+            lastWifiUpdate = currentTime
+            updateWiFiDisplay(networks)
+        } else {
+            // Si hay muchos cambios, actualizar de todas formas pero con delay mínimo
+            uiUpdateHandler.postDelayed({
+                if (System.currentTimeMillis() - lastWifiUpdate >= UPDATE_THROTTLE_MS) {
+                    lastWifiUpdate = System.currentTimeMillis()
+                    updateWiFiDisplay(networks)
+                }
+            }, 100)
+        }
+    }
+
+    private fun throttledBluetoothUpdate(devices: List<android.bluetooth.BluetoothDevice>) {
+        val currentTime = System.currentTimeMillis()
+        if (currentTime - lastBluetoothUpdate >= UPDATE_THROTTLE_MS) {
+            lastBluetoothUpdate = currentTime
+            updateBluetoothDisplay(devices)
+        } else {
+            uiUpdateHandler.postDelayed({
+                if (System.currentTimeMillis() - lastBluetoothUpdate >= UPDATE_THROTTLE_MS) {
+                    lastBluetoothUpdate = System.currentTimeMillis()
+                    updateBluetoothDisplay(devices)
+                }
+            }, 100)
+        }
+    }
+
+    private fun throttledCarrierUpdate(@Suppress("UNUSED_PARAMETER") carriers: List<com.exposiguard.app.data.WiFiNetwork>) {
+        val currentTime = System.currentTimeMillis()
+        if (currentTime - lastCarrierUpdate >= UPDATE_THROTTLE_MS) {
+            lastCarrierUpdate = currentTime
+        updateCarrierDisplay()
+        } else {
+            uiUpdateHandler.postDelayed({
+                if (System.currentTimeMillis() - lastCarrierUpdate >= UPDATE_THROTTLE_MS) {
+                    lastCarrierUpdate = System.currentTimeMillis()
+            updateCarrierDisplay()
+                }
+            }, 100)
+        }
+    }
+
+    private fun getUserProfileData(): Triple<Double, Double, String> {
+        val userProfileManager = UserProfileManager(requireContext())
+        val weight = userProfileManager.getWeight() // Siempre en kg internamente
+        val height = userProfileManager.getHeight() // Siempre en cm internamente
+        val standard = userProfileManager.getExposureStandard()
+        return Triple(weight, height, standard)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Re-verificar permisos cuando el fragment vuelve a estar activo
+        if (!checkRequiredPermissions()) {
+            showPermissionRequiredMessage()
+        }
+    }
+
+    // El refresco manual se realiza con el botón global (AppBar), que emite AppEvents.DataChanged.
+
+    private fun loadWiFiData() {
+        // Cargar datos de WiFi y Bluetooth
+        try {
+            // Escanear redes WiFi
+            val wifiNetworks = wiFiManager.getWiFiNetworks()
+            throttledWifiUpdate(wifiNetworks)
+
+            // Obtener dispositivos Bluetooth
+            val bluetoothDevices = wiFiManager.getBluetoothDevices()
+            throttledBluetoothUpdate(bluetoothDevices)
+
+            // Actualizar información de carriers
+            throttledCarrierUpdate(emptyList())
+
+        } catch (e: Exception) {
+            binding.textWifi.text = getString(R.string.wifi_error_loading_data) + " ${e.message}"
+            binding.textBluetooth.text = getString(R.string.wifi_error_loading_data) + " ${e.message}"
+        }
+    }
+
+    private fun updateWiFiDisplay(networks: List<com.exposiguard.app.data.WiFiNetwork>) {
+        if (networks.isNotEmpty()) {
+            val wifiText = buildString {
+                append("Redes WiFi detectadas: ${networks.size}\n\n")
+
+                // Obtener datos del usuario desde SharedPreferences
+                val (weight, height, selectedStandard) = getUserProfileData()
+                val imc = requireContext().getSharedPreferences("exposiguard_settings", android.content.Context.MODE_PRIVATE)
+                    .getFloat("user_imc", 24.2f).toDouble()
+                val userProfile = EMFManager.UserProfile(weight, height, imc)
+                val absorptionFactor = emfManager.calculateAbsorptionFactor(userProfile)
+
+                networks.forEach { network ->
+                    val frequency = network.frequency
+                    val band = if (frequency in 2400..2500) "2.4 GHz" else if (frequency in 5150..5850) "5 GHz" else "Otro"
+                    val distance = 1.0 // Asumir distancia de 1 metro para cálculo
+                    val wifiSAR = emfManager.calculateWiFiSAR(network.level, distance, absorptionFactor)
+                    val exposureLimit = emfManager.calculateExposureLimits(selectedStandard)
+                    val riskLevel = emfManager.evaluateRiskLevel(wifiSAR, exposureLimit)
+
+                    append("• ${network.ssid} (${network.bssid})\n")
+                    append("  Banda: $band | Señal: ${network.level}dBm | SAR: ${String.format("%.3f", wifiSAR)} W/kg\n")
+                    append("  Riesgo: $riskLevel\n")
+                }
+            }
+            binding.textWifi.text = wifiText
+        } else {
+            binding.textWifi.text = "No se detectaron redes WiFi cercanas"
+        }
+    }
+
+    private fun updateCarrierDisplay() {
+        val carrierText = buildString {
+            // Información de redes de operadores móviles disponibles
+            append("📡 Redes de Operadores Móviles Disponibles:\n\n")
+
+            val cellularNetworks = wiFiManager.getCarrierNetworkInfo()
+            append(cellularNetworks)
+
+            append("\n\n📱 Tu Red Celular Actual:\n")
+            append("• ${wiFiManager.getCellularNetworkInfo().replace("📡 Red Celular Actual:", "").trim()}\n\n")
+
+            // Calcular SAR de operadores móviles
+            val availableNetworks = wiFiManager.getAvailableCellularNetworks()
+            if (availableNetworks.isNotEmpty()) {
+                append("🔬 Cálculo SAR (Absorción Específica):\n")
+
+                // Obtener datos del usuario desde SharedPreferences
+                val (weight, height, selectedStandard) = getUserProfileData()
+                val imc = requireContext().getSharedPreferences("exposiguard_settings", android.content.Context.MODE_PRIVATE)
+                    .getFloat("user_imc", 24.2f).toDouble()
+                val userProfile = EMFManager.UserProfile(weight, height, imc)
+                val absorptionFactor = emfManager.calculateAbsorptionFactor(userProfile)
+                val exposureLimit = emfManager.calculateExposureLimits(selectedStandard)
+
+                // Calcular SAR basado en operadores detectados
+                val wifiManager = WiFiManager(requireContext())
+                val sarManager = com.exposiguard.app.managers.SARManager(requireContext(), wifiManager)
+                val currentSAR = sarManager.getCurrentSARLevelWithUserData(weight, height, selectedStandard)
+                val riskLevel = emfManager.evaluateRiskLevel(currentSAR, exposureLimit)
+
+                append("• SAR calculado: ${String.format("%.3f", currentSAR)} W/kg\n")
+                append("• Límite ${selectedStandard}: ${String.format("%.1f", exposureLimit)} W/kg\n")
+                append("• Nivel de riesgo: $riskLevel\n")
+                append("• Factor de absorción: ${String.format("%.3f", absorptionFactor)}\n")
+            }
+
+            append("\n💡 Tip: Estas son las redes celulares que tu dispositivo puede detectar")
+        }
+        binding.textTelephony.text = carrierText
+    }
+
+    private fun updateCellularNetworkDisplay(networkData: com.exposiguard.app.data.NetworkData) {
+        val carrierText = buildString {
+            append("📡 Información de Red Celular (como Atalaya):\n\n")
+
+            if (networkData.carrierName.isNotEmpty()) {
+                append("• Operador: ${networkData.carrierName}\n")
+            }
+
+            if (networkData.networkType.isNotEmpty()) {
+                append("• Tipo de Red: ${networkData.networkType}\n")
+            }
+
+            if (networkData.operatorCode.isNotEmpty()) {
+                append("• Código: ${networkData.operatorCode}\n")
+            }
+
+            if (networkData.isAirplaneEnabled) {
+                append("• Modo Avión: Activado\n")
+            }
+
+            append("\n💡 Información actualizada en tiempo real")
+        }
+        binding.textTelephony.text = carrierText
+    }
+
+    private fun updateBluetoothDisplay(devices: List<android.bluetooth.BluetoothDevice>) {
+        if (devices.isNotEmpty()) {
+            val bluetoothText = buildString {
+                append("Dispositivos Bluetooth detectados: ${devices.size}\n\n")
+                // Obtener datos del usuario desde SharedPreferences
+                val (_, _, selectedStandard) = getUserProfileData()
+                devices.forEach { device ->
+                    val deviceType = getDeviceType(device)
+                    val usageHours = 2.0 // Estimación de uso diario
+                    val headsetSAR = emfManager.calculateHeadsetSAR(deviceType, usageHours)
+                    val exposureLimit = emfManager.calculateExposureLimits(selectedStandard)
+                    val riskLevel = emfManager.evaluateRiskLevel(headsetSAR, exposureLimit)
+
+                    append("• ${device.name ?: "Dispositivo desconocido"}\n")
+                    append("  Tipo: $deviceType | SAR: ${String.format("%.3f", headsetSAR)} W/kg\n")
+                    append("  Riesgo: $riskLevel\n")
+                }
+            }
+            binding.textBluetooth.text = bluetoothText
+        } else {
+            binding.textBluetooth.text = "No se detectaron dispositivos Bluetooth"
+        }
+    }
+
+    private fun getDeviceType(device: android.bluetooth.BluetoothDevice): String {
+        return when (device.bluetoothClass?.majorDeviceClass) {
+            android.bluetooth.BluetoothClass.Device.Major.AUDIO_VIDEO -> "Audífonos/Auriculares"
+            android.bluetooth.BluetoothClass.Device.Major.PHONE -> "Teléfono"
+            android.bluetooth.BluetoothClass.Device.Major.COMPUTER -> "Computadora"
+            else -> "Dispositivo genérico"
+        }
+    }
+}
