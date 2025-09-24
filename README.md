@@ -1,78 +1,80 @@
 # ExposiGuard
 
-Aplicación Android para monitoreo de exposición a radiación electromagnética (EMF).
+Android application for monitoring electromagnetic radiation (EMF) exposure.
 
-## Autor
+## Author
 
 **David L.**  
 Email: david.polvo.estelar@gmail.com
 
-## Descripción
+## Description
 
-ExposiGuard es una aplicación que ayuda a los usuarios a monitorear y entender su exposición diaria a diferentes fuentes de radiación electromagnética, incluyendo:
+ExposiGuard is an application that helps users monitor and understand their daily exposure to different sources of electromagnetic radiation, including:
 
-- Campos electromagnéticos (EMF)
-- Redes WiFi
-- Señales Bluetooth
-- Señales celulares
-- Ruido ambiental
-- Radiación SAR de dispositivos
+- Electromagnetic fields (EMF)
+- WiFi networks
+- Bluetooth signals
+- Cellular signals
+- Ambient noise
+- Device SAR radiation
 
-## Características
+## Features
 
-- Monitoreo en tiempo real de señales EMF
-- Análisis de tendencias de exposición
-- Alertas configurables
-- Interfaz intuitiva en español
-- Datos de salud integrados (opcional)
+- Real-time EMF signal monitoring
+- Exposure trend analysis
+- Configurable alerts
+- Intuitive Spanish interface
+- Integrated health data (optional)
 
-## Licencia
+## License
 
-Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Derechos de Autor
+## Copyright
 
-Copyright (c) 2025 David L. Todos los derechos reservados.
+Copyright (c) 2025 David L. All rights reserved.
 
-La autoría y propiedad intelectual de este código pertenece exclusivamente a David L. El código está disponible bajo licencia MIT para uso personal y no comercial, manteniendo siempre la atribución al autor original.
+The authorship and intellectual property of this code belongs exclusively to David L. The code is available under MIT license for personal and non-commercial use, always maintaining attribution to the original author.
 
-## Compilación
+## Build
 
-Para compilar este proyecto necesitarás:
+To build this project you will need:
 
-1. **Android Studio** (versión Arctic Fox 2020.3.1 o superior)
-2. **SDK de Android** (API 35)
-3. **JDK** (versión 17 o superior)
+1. **Android Studio** (Arctic Fox 2020.3.1 or higher)
+2. **Android SDK** (API 35)
+3. **JDK** (version 17 or higher)
 
-### Opción 1: Usando Android Studio (Recomendado)
+### Option 1: Using Android Studio (Recommended)
 
-1. Abre el proyecto en Android Studio
-2. Espera a que se sincronicen las dependencias
-3. Ve a `Build > Generate Signed Bundle / APK`
-4. Selecciona `APK` y sigue el asistente
-5. El APK se generará en `app/build/outputs/apk/release/`
+1. Open the project in Android Studio
+2. Wait for dependencies to sync
+3. Go to `Build > Generate Signed Bundle / APK`
+4. Select `APK` and follow the wizard
+5. The APK will be generated in `app/build/outputs/apk/release/`
 
-### Opción 2: Usando Gradle (Línea de comandos)
+### Option 2: Using Gradle (Command Line)
 
 ```bash
-# Configurar SDK (si no está en la ruta por defecto)
-# Edita local.properties con la ruta correcta de tu SDK
+# Configure SDK (if not in default path)
+# Edit local.properties with your correct SDK path
 
 # Build debug
 ./gradlew assembleDebug
 
-# Build release (requiere keystore)
+# Build release (requires keystore)
 ./gradlew assembleRelease
 ```
 
-### Configuración del SDK
+### SDK Configuration
 
-Si el build falla con "SDK location not found":
-1. Instala Android Studio si no lo tienes
-2. El SDK se instala automáticamente con Android Studio
-3. La ruta típica es: `C:\Users\[TuUsuario]\AppData\Local\Android\Sdk`
-4. Edita `local.properties` si es necesario
+If build fails with "SDK location not found":
+1. Install Android Studio if you don't have it
+2. SDK is installed automatically with Android Studio
+3. Typical path is: `C:\Users\[YourUser]\AppData\Local\Android\Sdk`
+4. Edit `local.properties` if necessary
 
-## Contribución
+## Contribution
 
-Este proyecto es de código abierto pero no acepta contribuciones externas. Cualquier modificación debe ser realizada por el autor original.
+This project is open source but does not accept external contributions. Any modifications must be made by the original author.
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Q5Q61JMR4M)
