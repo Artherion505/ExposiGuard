@@ -40,13 +40,38 @@ La autoría y propiedad intelectual de este código pertenece exclusivamente a D
 
 Para compilar este proyecto necesitarás:
 
-1. Android Studio Arctic Fox o superior
-2. SDK de Android API 35
-3. JDK 17 o superior
+1. **Android Studio** (versión Arctic Fox 2020.3.1 o superior)
+2. **SDK de Android** (API 35)
+3. **JDK** (versión 17 o superior)
 
-`ash
+### Opción 1: Usando Android Studio (Recomendado)
+
+1. Abre el proyecto en Android Studio
+2. Espera a que se sincronicen las dependencias
+3. Ve a `Build > Generate Signed Bundle / APK`
+4. Selecciona `APK` y sigue el asistente
+5. El APK se generará en `app/build/outputs/apk/release/`
+
+### Opción 2: Usando Gradle (Línea de comandos)
+
+```bash
+# Configurar SDK (si no está en la ruta por defecto)
+# Edita local.properties con la ruta correcta de tu SDK
+
+# Build debug
 ./gradlew assembleDebug
-`
+
+# Build release (requiere keystore)
+./gradlew assembleRelease
+```
+
+### Configuración del SDK
+
+Si el build falla con "SDK location not found":
+1. Instala Android Studio si no lo tienes
+2. El SDK se instala automáticamente con Android Studio
+3. La ruta típica es: `C:\Users\[TuUsuario]\AppData\Local\Android\Sdk`
+4. Edita `local.properties` si es necesario
 
 ## Contribución
 
