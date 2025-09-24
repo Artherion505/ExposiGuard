@@ -1,37 +1,43 @@
 # ExposiGuard
 
-Android application for monitoring electromagnetic radiation (EMF) exposure.
+ExposiGuard is a privacy-first Android app that empowers users to monitor and understand their daily exposure to environmental signals — all without internet access, ads, or trackers.
+Main function is monitoring electromagnetic radiation (EMF) exposure.
 
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Q5Q61JMR4M)
+### 📡 What does it detect?
 
-## Description
+- 🧲 Electromagnetic fields (EMF)
+- 📶 WiFi networks
+- 🔵 Bluetooth signals
+- 📱 Cellular signals
+- 🔊 Ambient noise
+- 📱 Device SAR radiation
 
-ExposiGuard is an application that helps users monitor and understand their daily exposure to different sources of electromagnetic radiation, including:
+### ⚙️ Key Features
 
-- Electromagnetic fields (EMF)
-- WiFi networks
-- Bluetooth signals
-- Cellular signals
-- Ambient noise
-- Device SAR radiation
+- 📈 Real-time EMF signal monitoring
+- 📊 Exposure trend analysis
+- 🚨 Configurable alerts
+- 🌐 Intuitive Spanish interface
+- 🧑‍⚕️ Optional health data integration
+- 🔐 100% offline — no cloud, no tracking
 
-## Features
+FAQS
+Does ExposiGuard send data to the cloud?
+❌ No. ExposiGuard does not send any data to the cloud.
+✅ Fully local: All functionality runs on your device
+✅ No internet permission: The manifest includes no network access
+✅ Analytics disabled: No telemetry is collected
+✅ Privacy by design: Your data never leaves your device
 
-- Real-time EMF signal monitoring
-- Exposure trend analysis
-- Configurable alerts
-- Intuitive Spanish interface
-- Integrated health data (optional)
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Copyright
-
-Copyright (c) 2025 David L. All rights reserved.
-
-The authorship and intellectual property of this code belongs exclusively to David L. The code is available under MIT license for personal and non-commercial use, always maintaining attribution to the original author.
+🔒 How is my data stored and protected?
+ExposiGuard uses secure local storage with Android’s built-in protection:
+✅ Local database: Uses Room (SQLite) to store data only on your device
+✅ No external servers: No remote communication or sync
+✅ System-level protection: Android secures app data automatically
+✅ Optional data: Health-related info is fully optional and stays local
+Data location:
+Database: /data/data/com.exposiguard.app/databases/
+Config files: Stored only in the app’s internal storage
 
 ## Build
 
@@ -70,54 +76,9 @@ If build fails with "SDK location not found":
 3. Typical path is: `C:\Users\[YourUser]\AppData\Local\Android\Sdk`
 4. Edit `local.properties` if necessary
 
-## F-Droid Submission
+## License
 
-ExposiGuard is available on F-Droid, the free and open source Android app repository.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-### Automated Submission Script
 
-For easy F-Droid submission, use the provided PowerShell script:
-
-```powershell
-# Run the submission script (replace YOUR_USERNAME with your GitLab username)
-.\submit-to-fdroid.ps1 -GitLabUsername "YOUR_USERNAME"
-
-# Or run interactively
-.\submit-to-fdroid.ps1
-```
-
-The script will:
-
-1. Clone your F-Droid data fork
-2. Create a feature branch
-3. Copy the metadata file
-4. Commit and push changes
-5. Provide instructions for creating the merge request
-
-### Manual Submission
-
-If you prefer manual submission:
-
-1. Fork `https://gitlab.com/fdroid/fdroiddata`
-2. Clone your fork: `git clone https://gitlab.com/YOUR_USERNAME/fdroiddata.git`
-3. Create branch: `git checkout -b exposiguard-submission`
-4. Copy metadata: `cp metadata/com.exposiguard.app.yml fdroiddata/metadata/`
-5. Commit: `git add metadata/com.exposiguard.app.yml && git commit -m "Add ExposiGuard"`
-6. Push: `git push origin exposiguard-submission`
-7. Create merge request at: `https://gitlab.com/YOUR_USERNAME/fdroiddata/-/merge_requests/new`
-
-### Metadata File
-
-The F-Droid metadata file is located at `metadata/com.exposiguard.app.yml` and contains:
-
-- App information and description
-- Build configuration
-- Repository links
-- Version information
-
-For more information, see [F-DROID_SUBMISSION.md](F-DROID_SUBMISSION.md).
-
-## Contribution
-
-This project is open source but does not accept external contributions. Any modifications must be made by the original author.
 
