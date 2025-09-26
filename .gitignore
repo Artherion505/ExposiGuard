@@ -20,8 +20,12 @@ Thumbs.db
 local.properties
 
 # Keystore files (sensitive)
-keystore.jks
+*.jks
+*.keystore
 keystore.properties
+key.properties
+signing.properties
+exposiguard-release.jks
 
 # Logs
 *.log
