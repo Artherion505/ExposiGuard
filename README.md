@@ -12,6 +12,18 @@
 </p>
 
 
+## 🌌 Why ExposiGuard Exists
+
+We live immersed in invisible constellations of electromagnetic signals — WiFi, Bluetooth, cellular, ambient noise — yet most of us have no idea how much our bodies absorb or how these exposures evolve over time. **ExposiGuard** was born from a simple realization: *we deserve to know*.
+
+This app is a poetic and technical response to a world saturated with signals. It empowers users to monitor their environment, protect their privacy, and make informed decisions — all without sacrificing autonomy or exposing personal data.
+
+Whether you're curious, cautious, or cultivating a low-EMF lifestyle, ExposiGuard offers clarity in the noise.
+
+---
+
+
+
 ### 📡 What does it detect?
 
 - 🧲 Electromagnetic fields (EMF)
