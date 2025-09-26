@@ -10,7 +10,11 @@
   allign="center"
 />
 </p>
-
+<div align="center">
+  <a href="https://ko-fi.com/artherion">
+    <img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="Support me on Ko-fi">
+  </a>
+</div>
 
 ## 🌌 Why ExposiGuard Exists
 
